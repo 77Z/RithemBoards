@@ -1,5 +1,6 @@
 <script context="module" lang="js">
 	/** @type {import('@sveltejs/kit').Load} */
+	//@ts-expect-error
 	export const load = async ({ url }) => ({ props: { url } });
 </script>
 
@@ -11,6 +12,8 @@
 
 	import PageTransition from '../components/PageTransition.svelte';
 	export let url: String;
+
+	let searchInput: HTMLInputElement;
 
 	let showShadow = false;
 
@@ -42,7 +45,7 @@
 	});
 
 	function focusOnSearch() {
-		let searchInput = document.getElementById('searchinput') as HTMLInputElement;
+		// let searchInput = document.getElementById('searchinput') as HTMLInputElement;
 		searchInput.focus();
 	}
 </script>
@@ -57,9 +60,15 @@
 		<a class="title title-font" sveltekit:prefetch href="/">RithemBoards</a>
 
 		<div class="toolbox">
+			<button
+				class="material-symbols-outlined settings-button"
+				aria-label="Website Settings"
+				on:click={openAccessibilityModal}
+				title="Website Settings (Ctrl + P)">settings</button
+			>
 			<div class="searchbox" on:click={focusOnSearch}>
 				<span class="material-symbols-outlined search-icon">search</span>
-				<input type="text" id="searchinput" aria-label="Search Input" />
+				<input type="text" bind:this={searchInput} class="searchInput" aria-label="Search Input" />
 				<span class="keycap">/</span>
 			</div>
 			<a class="toplink" href="https://rithem.77z.dev">Get Rithem</a>
@@ -147,14 +156,14 @@
 		cursor: text;
 	}
 
-	#searchinput {
+	.searchInput {
 		width: 120px;
 		background: none;
 		border: none;
 		color: var(--theme-colors-text);
 	}
 
-	#searchinput:focus {
+	.searchInput:focus {
 		box-shadow: none;
 		width: 400px;
 	}
@@ -199,5 +208,25 @@
 
 	.navbar-shadow {
 		box-shadow: 0 0 30px #000;
+	}
+
+	.settings-button {
+		background: none;
+		cursor: pointer;
+		border-radius: 1000px;
+		border: none;
+		height: 30px;
+		width: 30px;
+		color: var(--main-fg-color);
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		margin-left: 10px;
+		margin-right: 10px;
+		font-size: 20px;
+	}
+
+	.settings-button:hover {
+		background: #ffffff50;
 	}
 </style>

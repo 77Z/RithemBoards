@@ -8,10 +8,25 @@
 	export function closeModal() {
 		visible = false;
 	}
+
+	interface zoomParams {
+		duration: number;
+	}
+
+	function zoom(node: Element, { duration }: zoomParams) {
+		return {
+			duration,
+			css: (t: number) => {
+				return `
+					transform: scale(${t});
+				`;
+			}
+		};
+	}
 </script>
 
 <div class="bg {visible ? 'visible' : ''}" />
-<div class="container {visible ? 'visible' : ''}">
+<div class="container {visible ? 'visible' : ''}" in:zoom={{ duration: 8000 }}>
 	<div class="modal">
 		<button
 			class="material-symbols-outlined"
