@@ -6,9 +6,11 @@
 
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { ThemeWrapper, ThemeToggle } from 'svelte-themer';
+	import { ThemeWrapper } from 'svelte-themer';
 	import { themes } from '../themes';
 	import Modal from '../components/Modal.svelte';
+	import { get } from 'svelte/store';
+	import { currentThemeName, themes as themesStore } from 'svelte-themer/support/store';
 
 	import PageTransition from '../components/PageTransition.svelte';
 	export let url: String;
@@ -21,6 +23,19 @@
 
 	function openAccessibilityModal() {
 		accessibilityModalComponent.openModel();
+	}
+
+	function changeTheme(themeToUse: number) {
+		let themes = get(themesStore);
+		currentThemeName.update((current) => {
+			let keys = Object.keys(themes);
+			return keys.reduce((newCurrent, theme, index, source) => {
+				if (theme === current) {
+					return source[themeToUse];
+				}
+				return newCurrent;
+			}, '');
+		});
 	}
 
 	onMount(async () => {
@@ -88,7 +103,7 @@
 	</footer> -->
 
 	<Modal bind:this={accessibilityModalComponent}>
-		<h1>Accessibility Settings</h1>
+		<h1>Settings</h1>
 		<p>
 			By default system settings will control these values, but as a backup, these are overrides
 		</p>
@@ -96,9 +111,38 @@
 			<input type="checkbox" />
 			<span>Reduced Motion</span>
 		</div>
+		<div class="themes-picker">
+			<div
+				on:click={(e) => {
+					changeTheme(0);
+				}}
+			>
+				Dark
+			</div>
+			<div
+				on:click={(e) => {
+					changeTheme(1);
+				}}
+			>
+				Light
+			</div>
+			<div
+				on:click={(e) => {
+					changeTheme(2);
+				}}
+			>
+				Dark High Contrast
+			</div>
+			<div
+				on:click={(e) => {
+					changeTheme(3);
+				}}
+			>
+				Dark High Contrast
+			</div>
+		</div>
 		<div>
-			<input type="checkbox" />
-			<span>Force High Contrast theme</span>
+			<a href="/about">About</a> | <a href="/privacy">Privacy Policy</a>
 		</div>
 	</Modal>
 </ThemeWrapper>
@@ -228,5 +272,23 @@
 
 	.settings-button:hover {
 		background: #ffffff50;
+	}
+
+	.themes-picker {
+		border-radius: 10px;
+		border: 2px solid #fff;
+	}
+
+	.themes-picker div {
+		padding: 10px 20px;
+		cursor: pointer;
+	}
+
+	.themes-picker div:hover {
+		background: #ffffff50;
+	}
+
+	.themes-picker div:not(:last-child) {
+		border-bottom: 2px solid #fff;
 	}
 </style>
