@@ -92,6 +92,7 @@
 				/>
 				<span class="keycap">/</span>
 			</div>
+			<a class="toplink" sveltekit:prefetch href="/leaderboard">Leaderboard</a>
 			<a class="toplink" href="https://rithem.77z.dev">Get Rithem</a>
 			<a class="toplink" sveltekit:prefetch href="/login">Log In</a>
 		</div>
