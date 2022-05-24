@@ -83,7 +83,13 @@
 			>
 			<div class="searchbox" on:click={focusOnSearch}>
 				<span class="material-symbols-outlined search-icon">search</span>
-				<input type="text" bind:this={searchInput} class="searchInput" aria-label="Search Input" />
+				<input
+					type="text"
+					bind:this={searchInput}
+					placeholder="Search..."
+					class="searchInput"
+					aria-label="Search Input"
+				/>
 				<span class="keycap">/</span>
 			</div>
 			<a class="toplink" href="https://rithem.77z.dev">Get Rithem</a>
@@ -142,7 +148,8 @@
 			</div>
 		</div>
 		<div>
-			<a href="/about">About</a> | <a href="/privacy">Privacy Policy</a>
+			<a href="/about" on:click={accessibilityModalComponent.closeModal}>About</a> |
+			<a href="/privacy" on:click={accessibilityModalComponent.closeModal}>Privacy Policy</a>
 		</div>
 	</Modal>
 </ThemeWrapper>
