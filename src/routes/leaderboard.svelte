@@ -2,15 +2,15 @@
 	import Panel from '../components/Panel.svelte';
 </script>
 
+<title>Player Leaderboards</title>
+
 <h1 class="center">Player Leaderboards</h1>
 
 <Panel>
 	<ul class="player-leaderboard">
-		<li>Player</li>
-		<li>Player</li>
-		<li>Player</li>
-		<li>Player</li>
-		<li>Player</li>
+		<li>
+			<img src="/favicon.png" draggable="false" alt="Player Profile" />
+		</li>
 	</ul>
 </Panel>
 
@@ -27,5 +27,10 @@
 		padding: 5px;
 		box-sizing: border-box;
 		cursor: pointer;
+	}
+
+	.player-leaderboard li img {
+		height: 40px;
+		width: 40px;
 	}
 </style>
