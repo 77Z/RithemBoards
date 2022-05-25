@@ -9,7 +9,12 @@
 <Panel>
 	<ul class="player-leaderboard">
 		<li>
-			<img src="/favicon.png" draggable="false" alt="Player Profile" />
+			<div>
+				<img src="/favicon.png" draggable="false" alt="Player Profile" />
+			</div>
+			<div>
+				<p>Me</p>
+			</div>
 		</li>
 	</ul>
 </Panel>
@@ -27,6 +32,9 @@
 		padding: 5px;
 		box-sizing: border-box;
 		cursor: pointer;
+		display: flex;
+		gap: 10px;
+		align-items: center;
 	}
 
 	.player-leaderboard li img {
